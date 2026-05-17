@@ -111,6 +111,10 @@ class MemoryProvider(ABC):
 
     def save_config(self, values: dict[str, Any], hermes_home: str) -> None:
         """保存非敏感配置到原生路径。默认空实现（纯 env var 的 provider 不需要）。"""
+        pass
+
+    def save_config(self, values: dict[str, Any], hermes_home: str) -> None:
+        """保存非敏感配置到原生路径。默认空实现（纯 env var 的 provider 不需要）。"""
 
     def shutdown(self) -> None:
         """清理关闭。"""

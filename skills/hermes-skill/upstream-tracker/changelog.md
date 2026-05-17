@@ -2,6 +2,22 @@
 
 
 ---
+## 同步检查 (2026-05-17)
+
+### 待处理融合: 4 个
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|----------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ⚠️ 部分已融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ⚠️ 部分已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本次改进
+- ✅ 添加 MemoryProvider.save_config() 方法到 memory_tool.py
+- ✅ 启用 memory-lancedb 插件（使用本地 bge-m3 嵌入模型）
+- ✅ 配置 hermes-skill 定时任务（每小时 nudge + 每日上游追踪）
+
+---
 ## 同步检查 (2026-04-11)
 
 ### 新增提交 (30 个)
