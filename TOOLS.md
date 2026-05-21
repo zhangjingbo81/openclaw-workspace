@@ -47,7 +47,6 @@
 | `BANANA_PRO_API_KEY` | Banana Pro | paper2diagram |
 | `ZOTERO_CREDENTIALS` | Zotero API | social-media-scholar |
 | `BAIDU_API_KEY` | 百度搜索 | baidu-search-v2-1.0.0, quincy-baidu-scholar-search |
-| `OPENAI_API_KEY` | 向量嵌入 | elite-longterm-memory |
 | `ELEVENLABS_API_KEY` | TTS 语音 | subtitle-generator-elevenlabs |
 
 ### 安全提醒

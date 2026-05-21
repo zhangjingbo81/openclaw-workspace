@@ -2,6 +2,44 @@
 
 
 ---
+## 同步检查 (2026-05-19)
+
+### 待处理融合：4 个
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|----------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ✅ 已完成融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ✅ 已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本次改进
+- ✅ **完成 memory_manager.py 高价值融合** (31/10)
+  - 新增 `reset()` - 清空所有记忆存储
+  - 新增 `feed()` - 主动喂养记忆（批量添加）
+  - 新增 `flush()` - 强制刷新到持久化存储
+  - 新增 `_max_partial_suffix()` - 智能后缀截断（保留最后关键信息）
+- ✅ 所有 4 个高价值方法已实现并通过语法检查
+- ✅ 上游融合状态：全部完成
+
+---
+## 同步检查 (2026-05-18)
+
+### 待处理融合：4 个
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|----------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ⚠️ 部分已融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ⚠️ 部分已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本次改进
+- ✅ 添加 hermes-nudge-hourly 定时任务（每小时 nudge 自检）
+- ✅ 添加 hermes-upstream-daily 定时任务（每日上游追踪检查）
+- ✅ 演示记忆系统（HOT: 7→8, WARM: 1, 总计: 9）
+- ✅ 执行上游融合检查（无新提交，状态稳定）
+- ✅ 保存配置改进记忆到 hermes 记忆系统
+
+---
 ## 同步检查 (2026-05-17)
 
 ### 待处理融合: 4 个

@@ -1,0 +1,17 @@
+{
+  "owner": "byungkyu",
+  "slug": "manus-api",
+  "displayName": "Manus",
+  "latest": {
+    "version": "1.0.1",
+    "publishedAt": 1777587854357,
+    "commit": "https://github.com/openclaw/skills/commit/703567f48184c2bdc7c7f5b016ee53c63056f1bd"
+  },
+  "history": [
+    {
+      "version": "1.0.0",
+      "publishedAt": 1772242385900,
+      "commit": "https://github.com/openclaw/skills/commit/d687b846412262cb47d17aefcce6bedc0372e289"
+    }
+  ]
+}

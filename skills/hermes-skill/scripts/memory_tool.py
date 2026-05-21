@@ -602,6 +602,102 @@ class MemoryManager:
                     provider.name, e,
                 )
 
+    # ── 记忆管理扩展方法 ────────────────────────────────────────────────
+    def reset(self) -> None:
+        """清空所有记忆存储（HOT/WARM/COLD）。"""
+        for tier in ["hot", "warm", "cold"]:
+            try:
+                tier_file = MEMORY_DIR / f"{tier}.txt"
+                if tier_file.exists():
+                    tier_file.write_text("")
+                    logger.info("Reset memory tier '%s' successfully", tier)
+            except Exception as e:
+                logger.warning("Failed to reset memory tier '%s': %s", tier, e)
+
+    def feed(self, content: str, tier: str = "hot", category: str | None = None) -> str:
+        """主动喂养记忆（批量添加）。
+        
+        Args:
+            content: 记忆内容
+            tier: 记忆层级 (hot/warm/cold)
+            category: 可选分类标签
+            
+        Returns:
+            记忆 ID（时间戳）
+        """
+        builtin = self.get_provider("builtin")
+        if builtin is None:
+            raise RuntimeError("Built-in memory provider not found")
+        return builtin._add(content, tier=tier, category=category)
+
+    def flush(self) -> None:
+        """强制将所有待处理记忆写入持久化存储。
+        
+        用于确保内存中的记忆变更立即持久化。"""
+        builtin = self.get_provider("builtin")
+        if builtin is not None:
+            # Builtin provider 使用文件直接写入，已经是同步的
+            # 这里预留接口供外部 provider 实现异步刷新
+            logger.debug("Flush called - builtin provider is synchronous")
+            for provider in self._providers:
+                if provider.name != "builtin" and hasattr(provider, 'flush'):
+                    try:
+                        provider.flush()
+                        logger.info("Flushed external memory provider '%s'", provider.name)
+                    except Exception as e:
+                        logger.warning("Failed to flush provider '%s': %s", provider.name, e)
+
+    def _max_partial_suffix(self, text: str, max_tokens: int) -> str:
+        """智能后缀截断，保留最后的关键信息。
+        
+        与简单的前缀截断不同，此方法会尝试保留对话的最后部分，
+        因为最后的信息通常最重要。
+        
+        Args:
+            text: 要截断的文本
+            max_tokens: 最大允许 token 数（估算：1 token ≈ 4 字符）
+            
+        Returns:
+            截断后的文本，保留最后的关键信息
+        """
+        # 估算字符数（1 token ≈ 4 字符，中文 ≈ 1.5 字符）
+        max_chars = max_tokens * 4
+        
+        if len(text) <= max_chars:
+            return text
+        
+        # 尝试按对话轮次分割（假设每轮以 "User:" 或 "Assistant:" 开头）
+        import re
+        pattern = r"(?=User:|Assistant:)"
+        segments = re.split(pattern, text)
+        
+        # 从后往前累加，直到接近 max_chars
+        result_parts = []
+        current_length = 0
+        
+        for segment in reversed(segments):
+            seg_len = len(segment)
+            if current_length + seg_len <= max_chars:
+                result_parts.append(segment)
+                current_length += seg_len
+            else:
+                # 当前段太长，需要截断
+                if seg_len > max_chars:
+                    result_parts.append(segment[:max_chars])
+                else:
+                    remaining = max_chars - current_length
+                    result_parts.append(segment[-remaining:] if remaining > 0 else "")
+                break
+        
+        # 反转并拼接
+        result = "".join(reversed(result_parts))
+        
+        # 添加截断标记
+        if len(result) < len(text):
+            result = f"[上下文已截断，保留最后 {max_tokens} tokens]\n{result}"
+        
+        return result
+
     def shutdown_all(self) -> None:
         """逆序关闭所有 provider（最后注册的最先关闭）。"""
         for provider in reversed(self._providers):
