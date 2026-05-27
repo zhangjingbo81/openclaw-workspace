@@ -1,5 +1,98 @@
 # Hermes Agent 上游追踪记录
 
+## 同步检查 (2026-05-27)
+
+### 上游状态
+- ✅ 无新提交（最后提交 `524cbab` 仍为最新，连续 7 天无更新）
+- ✅ 待处理融合：0 个（4 项高价值融合已于 2026-05-19 完成）
+- 📊 上游版本轨迹：稳定在 v0.8.x 阶段，已连续 7 天无重大更新
+
+### 融合状态确认
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|---------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ✅ 已融合（2026-05-19） |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ✅ 已融合（2026-05-19） |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合（2026-05-19） |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合（2026-05-19） |
+
+### 本次更新
+- ✅ **更新 upstream-tracker/state.json**：标记 4 项融合完成，清除 pending_diffs
+- ✅ **验证本地实现**：memory_tool.py 已包含所有上游方法（reset/feed/flush/sanitize_context/prefetch 等）
+- 💡 **建议调整**：上游连续 7 天无更新，可将检查频率从每日改为每 3 天
+
+### 本地实现验证
+| 上游方法 | 本地实现位置 | 状态 |
+|---------|-------------|------|
+| reset() | memory_tool.py:606 | ✅ |
+| feed() | memory_tool.py:617 | ✅ |
+| flush() | memory_tool.py:633 | ✅ |
+| _max_partial_suffix() | memory_tool.py:650 | ✅ |
+| sanitize_context() | memory_tool.py:347 | ✅ |
+| prefetch() | memory_tool.py:70/232/463 | ✅ |
+
+---
+
+## 同步检查 (2026-05-25)
+
+### 上游状态
+- ✅ 无新提交（最后提交 `524cbab` 仍为最新）
+- ✅ 待处理融合：4 个（状态稳定，已完成融合）
+- 📊 上游版本轨迹：稳定在 v0.8.x 阶段，已连续 5 天无重大更新
+
+### 融合状态回顾
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|---------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ✅ 已完成融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ✅ 已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本周观察
+- 上游已连续 5 天无重大更新（自 5 月 20 日起）
+- 本地实现已完全覆盖上游核心能力
+- 建议：将上游检查频率从每日改为每 3 天，节省 API 调用
+
+---
+## 同步检查 (2026-05-24)
+
+### 上游状态
+- ✅ 无新提交（最后提交 `524cbab` 仍为最新）
+- ✅ 待处理融合：4 个（状态稳定，已完成融合）
+- 📊 上游版本轨迹：稳定在 v0.8.x 阶段
+
+### 融合状态回顾
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|----------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ✅ 已完成融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ✅ 已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本周观察
+- 上游已连续 3 天无重大更新（自 5 月 22 日起）
+- 本地实现已覆盖上游核心能力
+- 建议：若持续无更新，可考虑将检查频率从每日改为每 3 天
+
+---
+## 同步检查 (2026-05-22)
+
+### 上游状态
+- ✅ 无新提交（最后提交 `524cbab` 仍为最新）
+- ✅ 待处理融合：4 个（状态稳定，已完成融合）
+- 📊 上游版本轨迹：稳定在 v0.8.x 阶段
+
+### 融合状态回顾
+| 上游路径 | 本地对应 | 融合价值 | 状态 |
+|----------|---------|---------|------|
+| agent/memory_manager.py | memory_tool.py | 31/10 (high) | ✅ 已完成融合 |
+| agent/memory_provider.py | memory_tool.py | 20/10 (high) | ✅ 已融合 |
+| agent/prompt_builder.py | nudge_system.py | 2/10 (low) | ✅ 已融合 |
+| agent/skill_utils.py | auto_skill_creator.py | 4/10 (low) | ✅ 已融合 |
+
+### 本周观察
+- 上游无重大更新，本地实现已覆盖上游核心能力
+- 本地 memory_tool.py 已实现上游所有高价值方法（reset/feed/flush/_max_partial_suffix）
+- 建议：下周继续监控，若无更新可考虑降低检查频率
 
 ---
 ## 同步检查 (2026-05-19)

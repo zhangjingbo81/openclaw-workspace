@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from typing import Optional, Tuple, Dict, List, Any, Union
 
 # ── Paths ────────────────────────────────────────────────────────────────
 SELF_IMPROVING = Path.home() / "self-improving"
@@ -52,7 +53,7 @@ LOCAL_MAP = {
 
 
 # ── HTTP ────────────────────────────────────────────────────────────────
-def gh_get(url: str, timeout: int = 10) -> tuple[dict | list | None, bool]:
+def gh_get(url: str, timeout: int = 10) -> Tuple[Optional[Union[Dict, List, Any]], bool]:
     """Fetch JSON from GitHub API. Returns (data, ok)."""
     req = Request(url, headers={
         "Accept": "application/vnd.github.v3+json",
@@ -71,7 +72,7 @@ def gh_get(url: str, timeout: int = 10) -> tuple[dict | list | None, bool]:
         return None, False
 
 
-def fetch(url: str, timeout: int = 10) -> str | None:
+def fetch(url: str, timeout: int = 10) -> Optional[str]:
     """Fetch raw text from URL."""
     req = Request(url, headers={"User-Agent": "hermes-upstream-tracker/1.0"})
     try:
@@ -100,7 +101,7 @@ def save_state(state: dict):
 
 
 # ── Commit Fetching ──────────────────────────────────────────────────────
-def fetch_recent_commits(since_sha: str | None = None, limit: int = 30) -> list[dict]:
+def fetch_recent_commits(since_sha: Optional[str] = None, limit: int = 30) -> List[Dict]:
     """Fetch recent commits. Returns list of commit dicts."""
     data, ok = gh_get(f"{UPSTREAM_API}/commits?per_page={limit}&sha=main")
     if not ok or not isinstance(data, list):
@@ -141,7 +142,7 @@ def should_ignore(path: str) -> bool:
 
 
 # ── Content Fetching & Analysis ─────────────────────────────────────────
-def local_for(upstream_path: str) -> Path | None:
+def local_for(upstream_path: str) -> Optional[Path]:
     name = Path(upstream_path).name
     for k, v in LOCAL_MAP.items():
         if name in k or k in upstream_path:
@@ -149,7 +150,7 @@ def local_for(upstream_path: str) -> Path | None:
     return None
 
 
-def analyze_file(upstream_path: str, upstream_sha: str, commit_msg: str) -> dict | None:
+def analyze_file(upstream_path: str, upstream_sha: str, commit_msg: str) -> Optional[Dict]:
     """Fetch upstream content and analyze fusion value vs local."""
     content = fetch(f"https://raw.githubusercontent.com/{UPSTREAM_REPO}/main/{upstream_path}")
     if content is None:
