@@ -1,49 +1,65 @@
 {
   "version": 1,
   "files": {
+    "memory/2026-05-27.md": {
+      "mtimeMs": 1779819719687,
+      "size": 2088,
+      "lastDreamingDayIngested": "2026-05-27"
+    },
+    "memory/2026-05-26.md": {
+      "mtimeMs": 1779819825760,
+      "size": 733,
+      "lastDreamingDayIngested": "2026-05-27"
+    },
+    "memory/2026-05-25-0428.md": {
+      "mtimeMs": 1779654516455,
+      "size": 9704,
+      "lastDreamingDayIngested": "2026-05-27"
+    },
+    "memory/2026-05-24-1121.md": {
+      "mtimeMs": 1779592914406,
+      "size": 3265,
+      "lastDreamingDayIngested": "2026-05-27"
+    },
+    "memory/2026-05-23.md": {
+      "mtimeMs": 1779508989239,
+      "size": 852,
+      "lastDreamingDayIngested": "2026-05-27"
+    },
     "memory/2026-05-22.md": {
-      "mtimeMs": 1779386898670,
-      "size": 1067,
-      "lastDreamingDayIngested": "2026-05-22"
+      "mtimeMs": 1779452598481,
+      "size": 239,
+      "lastDreamingDayIngested": "2026-05-27"
     },
     "memory/2026-05-22-0200.md": {
       "mtimeMs": 1779386444381,
       "size": 1424,
-      "lastDreamingDayIngested": "2026-05-22"
+      "lastDreamingDayIngested": "2026-05-27"
     },
     "memory/2026-05-22-0211.md": {
       "mtimeMs": 1779387172304,
       "size": 809,
-      "lastDreamingDayIngested": "2026-05-22"
+      "lastDreamingDayIngested": "2026-05-27"
     },
     "memory/2026-05-22-0237.md": {
       "mtimeMs": 1779388697656,
       "size": 947,
-      "lastDreamingDayIngested": "2026-05-22"
+      "lastDreamingDayIngested": "2026-05-27"
+    },
+    "memory/2026-05-22-2022.md": {
+      "mtimeMs": 1779452543158,
+      "size": 3240,
+      "lastDreamingDayIngested": "2026-05-27"
     },
     "memory/2026-05-21-0416.md": {
       "mtimeMs": 1779308206637,
       "size": 1414,
-      "lastDreamingDayIngested": "2026-05-22"
+      "lastDreamingDayIngested": "2026-05-27"
     },
     "memory/2026-05-21-2145.md": {
       "mtimeMs": 1779371116187,
       "size": 4667,
-      "lastDreamingDayIngested": "2026-05-22"
-    },
-    "memory/2026-05-19-qqmail-config.md": {
-      "mtimeMs": 1779158431601,
-      "size": 950,
-      "lastDreamingDayIngested": "2026-05-22"
-    },
-    "memory/2026-05-18.md": {
-      "mtimeMs": 1779043546477,
-      "size": 1748,
-      "lastDreamingDayIngested": "2026-05-22"
-    },
-    "memory/2026-05-16.md": {
-      "mtimeMs": 1778971558990,
-      "size": 111
+      "lastDreamingDayIngested": "2026-05-27"
     }
   }
 }
